@@ -4,9 +4,10 @@ const util = "util"
 const path = require("path");
 const fs = require("fs");
 
+
 const BASE_PATH = path.resolve(process.env.BASE_PATH || __dirname)
 const args = require("minimist")(process.argv.slice(2), {
-    boolean: ["help", "in", "out"],
+    boolean: ["help", "in", "out", "comp"],
     string: ["file"],
 });
 
