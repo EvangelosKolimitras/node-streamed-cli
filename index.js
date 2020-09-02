@@ -6,13 +6,14 @@ const fs = require("fs");
 
 const BASE_PATH = path.resolve(process.env.BASE_PATH || __dirname)
 const args = require("minimist")(process.argv.slice(2), {
-    boolean: ["help", "in"],
+    boolean: ["help", "in", "out"],
     string: ["file"],
 });
 
 const { erroring, printHelp, processFile } = require("./utils");
 
-if (args.help) return printHelp()
+if (args.help) return printHelp();
 if (args.in || args._.includes("-")) return processFile(process.stdin);
-if (args.file) return processFile(fs.createReadStream(path.join(BASE_PATH, args.file)));
+if (args.file) return processFile(args, fs.createReadStream(path.join(BASE_PATH, args.file)), BASE_PATH);
+
 erroring("Incorrect usage", true);
